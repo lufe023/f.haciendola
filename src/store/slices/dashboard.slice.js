@@ -7,6 +7,7 @@ export const playerSlice = createSlice({
         usersSinceSevenDay: "Cargando",
         usersThisMonth: "Cargando",
         usersLastMonth: "Cargando",
+        categories: null,
     },
     reducers: {
         setDashboardData: (state, action) => {
@@ -43,6 +44,12 @@ export const playerSlice = createSlice({
                 usersLastMonth: action.payload,
             };
         },
+        updateCategories: (state, action) => {
+            return {
+                ...state,
+                categories: action.payload,
+            };
+        },
     },
 });
 
@@ -52,6 +59,7 @@ export const {
     updateUsersSinceSevenDay,
     updateUsersThisMonth,
     updateUsersLastMonth,
+    updateCategories,
 } = playerSlice.actions;
 
 export default playerSlice.reducer;

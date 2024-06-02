@@ -1,13 +1,44 @@
-import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import React, { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setPageData } from '../../store/slices/page.slice';
+import NavBar from './NavBar';
+import { NavLink } from 'react-router-dom';
 
 const Aside = () => {
-  
+  const asideRef = useRef(null);
+  const toggleButtonRef = useRef(null);
+  const dispatch = useDispatch();
+  const menu = useSelector(state => state.pageSlice);
 
+  const handleOutsideClick = (event) => {
+    if (
+      asideRef.current &&
+      !asideRef.current.contains(event.target) &&
+      (!toggleButtonRef.current || !toggleButtonRef.current.contains(event.target))
+    ) {
+      dispatch(setPageData(false));
+    }
+  };
+
+  useEffect(() => {
+    // Agrega el event listener cuando el componente se monta
+    document.addEventListener('click', handleOutsideClick);
+
+    // Limpia el event listener cuando el componente se desmonta
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+    };
+  }, []);
 
   return (
-  <aside className="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 ps bg-white " id="sidenav-main">
-  <div className="sidenav-header">
+    <>
+      <NavBar toggleButtonRef={toggleButtonRef} />
+      <aside
+        ref={asideRef}
+        className={`sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 ps bg-white ${menu ? 'show' : 'hide'}`}
+        id="sidenav-main"
+      >
+    <div className="sidenav-header">
     <i className="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav" />
     <a className="navbar-brand m-0" href=" https://demos.creative-tim.com/argon-dashboard/pages/dashboard.html " target="_blank">
       <img src="./assets/img/logo-ct-dark.png" className="navbar-brand-img h-100" alt="main_logo" />
@@ -26,14 +57,33 @@ const Aside = () => {
         </NavLink>
       </li>
       <li className="nav-item">
-         <NavLink to={'/products'} className="nav-link " href="./pages/tables.html">
+        <NavLink to={'/products'} className="nav-link " href="./pages/tables.html">
           <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
             <i className="fas fa-store text-warning text-sm opacity-10" />
-
           </div>
           <span className="nav-link-text ms-1">Productos</span>
         </NavLink>
       </li>
+      <li className="nav-item">
+        <NavLink to={'/search'} className="nav-link " href="./pages/tables.html">
+          <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+            <i className="fas fa-search text-info text-sm opacity-10 tex" aria-hidden="true" />
+            
+          </div>
+          <span className="nav-link-text ms-1">Buscar</span>
+        </NavLink>
+      </li>
+
+      <li className="nav-item">
+        <NavLink to={'/categories'} className="nav-link " href="./pages/tables.html">
+          <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+            <i className="ni ni-tag text-secondary text-sm opacity-10 tex" aria-hidden="false" />
+            
+          </div>
+          <span className="nav-link-text ms-1">Categorías</span>
+        </NavLink>
+      </li>
+
       <li className="nav-item">
         <a className="nav-link " href="./pages/tables.html">
           <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -108,7 +158,7 @@ const Aside = () => {
     <a href="https://documenter.getpostman.com/view/25294531/2sA3QmCZbk" target="_blank" className="btn btn-dark btn-sm w-100 mb-3">Documentación</a>
     </div>
 </aside>
-
+</>
   )
 }
 

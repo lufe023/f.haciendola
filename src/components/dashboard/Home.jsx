@@ -6,6 +6,9 @@ import { useSelector } from 'react-redux'
 
 const Home = () => {
   let menu = useSelector(state => state.pageSlice)
+
+
+
   return (
   
     /*  las clases para pinear el menu g-sidenav-pinned*/

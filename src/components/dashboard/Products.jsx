@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import NavBar from './NavBar';
 import Aside from './Aside';
 import Header from './Header';
 import MiniCards from './MiniCards';
 import Footer from './Footer';
-import CategoriesCard from './CategoriesCard';
-import Carousel from './Carousel';
 import { useSelector } from 'react-redux';
 import Card from './Card';
 import axios from 'axios';
@@ -55,13 +52,14 @@ const Products = () => {
 
   let menu = useSelector(state => state.pageSlice);
  
+
+
   return (
     <>
       <div className={`g-sidenav-show bg-gray-100 ${menu ? 'g-sidenav-pinned' : ''}`}>
         <Header />
         <Aside />
         <main className="main-content position-relative border-radius-lg">
-          <NavBar />
           <div className="container-fluid py-4">
           <MiniCards/>
             <div className="row" style={{ minHeight: "120px" }}>
@@ -91,7 +89,29 @@ const Products = () => {
                 <span className="input-group-text" onClick={() => getAllProducts(1)} style={{ cursor: "pointer" }}><i className="fas fa-search" /></span>
               </div>
             </div>
-            
+            <div className="row" style={{ minHeight: "100px", marginTop:'50px' }}>
+            <nav aria-label="Contacts Page Navigation">
+                <ul className="pagination justify-content-center m-0">
+                  {startPage > 1 && (
+                    <li className="page-item">
+                      <button className="page-link" onClick={() => setCurrentPage(1)}>1</button>
+                    </li>
+                  )}
+                  {startPage > 2 && <li className="page-item disabled"><span className="page-link">...</span></li>}
+                  {pages.map(page => (
+                    <li key={page} className={`page-item ${currentPage === page ? 'active' : ''}`}>
+                      <button className="page-link" onClick={() => setCurrentPage(page)}>{page}</button>
+                    </li>
+                  ))}
+                  {endPage < totalPages - 1 && <li className="page-item disabled"><span className="page-link">...</span></li>}
+                  {endPage < totalPages && (
+                    <li className="page-item">
+                      <button className="page-link" onClick={() => setCurrentPage(totalPages)}>{totalPages}</button>
+                    </li>
+                  )}
+                </ul>
+              </nav>
+              </div>
             {loading &&<div style={{width:"100%", display:"flex", justifyContent:"center"}}> <Spinner /></div>}
             <div className="row">
               

@@ -1,16 +1,12 @@
 import React from 'react'
-import NavBar from './NavBar'
 import MiniCards from './MiniCards'
 import Carousel from './Carousel'
-import CategoriesCard from './CategoriesCard'
+import CategoriesCard from "../categories/CategoriesCard"
 import Footer from './Footer'
 
 const PanelArea = () => {
   return (
   <main className="main-content position-relative border-radius-lg ">
-  {/* Navbar */}
-    <NavBar/>
-  {/* End Navbar */}
   <div className="container-fluid py-4">
 
    <MiniCards/>

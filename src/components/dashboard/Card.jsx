@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Importa los estilos del carrusel
 import './carousel.css';
+import { Link } from 'react-router-dom';
 
 const Card = ({ product }) => {
   const [imageUrls, setImageUrls] = useState([]);
@@ -41,11 +42,11 @@ const Card = ({ product }) => {
   return (
     <div className="col-12 col-sm-6 col-md-4 d-flex flex-column" style={{ marginBottom: '15px' }}>
       <div className="card">
-        <div className="card-header">Category</div>
+        <div className="card-header">{product.categoryDetails.name}</div>
         <div className="card-body pt-0">
           <div className="row" style={{ display: 'flex', justifyContent: 'center' }}>
             {imageUrls.length > 0 ? (
-              <Carousel showThumbs={false}  useKeyboardArrows autoPlay>
+              <Carousel showThumbs={true}  useKeyboardArrows autoPlay stopOnHover emulateTouch swipeable>
                 {imageUrls.map((url, index) => (
                   <div key={index}>
                     <img src={url} alt={`${product.Title} ${index + 1}`} style={{ height: '200px' }} />
@@ -72,16 +73,24 @@ const Card = ({ product }) => {
           </div>
         </div>
         <div className="card-footer">
-          <div className="text-right" style={{ display: 'flex', alignItems: 'center', alignContent:"center"}}>
-          <div className="col-6 text-end">
-            <a href="#" className="btn bg-teal mb-0" alt="Agregar a Favorito">
+          <div className="text-right" style={{ display: 'flex', alignItems: 'center', alignContent:"center", flexWrap:"wrap"}}>
+          <div className="col-6">
+            <a href="#" className="btn bg-teal" alt="Agregar a Favorito">
               <i className="fas fa-heart" />&nbsp;&nbsp; Agregar Favoritos
             </a>
             </div>
-            <div className="col-6 text-end">
-            <a className="btn bg-gradient-primary mb-0"> <i className="fas fa-cart-plus" />&nbsp;&nbsp; Agregar al Carrito</a>
+            <div className="col-6">
+            <a className="btn bg-gradient-primary"> <i className="fas fa-cart-plus" />&nbsp;&nbsp; Agregar al Carrito</a>
             </div>
+            
+
+            <div className="col-6">
+            <Link to={`/products/edit/${product.id}`} className="btn bg-gradient-dark">
+              <i className="fas fa-edit" />&nbsp;&nbsp; Editar
+            </Link>
           </div>
+          </div>
+        
         </div>
       </div>
     </div>

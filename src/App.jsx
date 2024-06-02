@@ -10,6 +10,11 @@ import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import getUserbyId from './components/user/getUserbyId'
 import Products from './components/dashboard/Products'
+import SeeProducts from './components/products/SeeProducts'
+import EditProduct from './components/products/EditProduct'
+import FindProducts from './components/products/FindProducts'
+import SearchPage from './components/products/SearchPage'
+import CategoriesPage from './components/categories/CategoriesPage'
 
 
 
@@ -33,6 +38,11 @@ function App() {
       <Route element={<ProtectedRoutes/>}>
         <Route path='/' element={<Home/>}/>
         <Route path='/products' element={<Products/>}/>
+        <Route path="/search" element={<SearchPage />} />
+        <Route path='/products/:id' element={<SeeProducts/>}/>
+        <Route path="/products/edit/:id" element={<EditProduct/>} />
+        <Route path="/categories" element={<CategoriesPage/>} />
+        <Route path="/categories/:id" element={<CategoriesPage/>} />
       </Route>
       </Routes>
     </>

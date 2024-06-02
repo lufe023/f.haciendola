@@ -18,10 +18,13 @@
     justify-content: center;
     
 }
- 
+.carousel.carousel-slider .control-arrow {
+  background: rgb(0, 0, 0);
+}
+
   /* Cambiar el color del fondo al pasar el cursor */
   .carousel .control-arrow:hover {
-    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.697) !important;
 
   
   }
@@ -69,4 +72,12 @@
     background: rgba(0, 0, 0, 0.8);
     opacity: 1;
   }
+  .thumbs-wrapper{
+
+    height: 60px;
   
+  }
+  .thumbs-wrapper ul li img {
+    max-height: 50px;
+    border-radius: 0;
+  }
