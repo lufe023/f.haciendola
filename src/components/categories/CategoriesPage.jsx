@@ -8,7 +8,7 @@ import CategoryEdit from './CategoryEdit';
 import { setPageData } from '../../store/slices/page.slice';
 
 const CategoriesPage = () => {
-    let menu = useSelector(state => state.pageSlice);
+    let menu = useSelector(state => state.pageSlice.menu);
     const location = useLocation();
     const dispatch = useDispatch()
     const handleHeaderFocus = () => {

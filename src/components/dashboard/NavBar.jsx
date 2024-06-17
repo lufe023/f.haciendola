@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPageData } from '../../store/slices/page.slice';
+import {updateMenu} from '../../store/slices/page.slice';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import Cart from '../cart/Cart';
 
 const NavBar = ({toggleButtonRef}) => {
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const [searchTerm, setSearchTerm] = useState(query.get('query') || '');
-  const menu = useSelector(state => state.pageSlice);
+  const menu = useSelector(state => state.pageSlice.menu);
+
   const user = useSelector(state => state.userSlice);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -19,7 +21,7 @@ const NavBar = ({toggleButtonRef}) => {
   };
 
   const handleMenuToggle = () => {
-    dispatch(setPageData(!menu));
+    dispatch(updateMenu(!menu));
   };
 
   return (
@@ -95,6 +97,12 @@ const NavBar = ({toggleButtonRef}) => {
                 </li>
               </ul>
             </li>
+            <li className="nav-item px-3 d-flex align-items-center">
+  <a className="nav-link text-white p-0">
+    <i className="fa fa-cog fixed-plugin-button-nav cursor-pointer" aria-hidden="true" />
+  </a>
+</li>
+
             <li className="nav-item d-xl-none ps-3 d-flex align-items-center">
             <Link onClick={handleMenuToggle} className="nav-link text-white p-0" id="iconNavbarSidenav" ref={toggleButtonRef}>
                 <div className="sidenav-toggler-inner">
@@ -110,6 +118,7 @@ const NavBar = ({toggleButtonRef}) => {
           </ul>
         </div>
       </div>
+      {/* <Cart/> */}
     </nav>
   );
 };

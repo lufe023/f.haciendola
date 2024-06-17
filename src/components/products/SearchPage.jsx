@@ -10,7 +10,7 @@ const SearchPage = () => {
   const query = new URLSearchParams(location.search);
   const [searchTerm, setSearchTerm] = useState(query.get('query'));
   const navigate = useNavigate();
-  let menu = useSelector(state => state.pageSlice);
+  let menu = useSelector(state => state.pageSlice.menu);
 
   const handleSearch = (e) => {
     if (e.key === 'Enter' && searchTerm.trim() && searchTerm.length>3) {

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPageData } from '../../store/slices/page.slice';
+import { updateMenu } from '../../store/slices/page.slice';
 import NavBar from './NavBar';
 import { NavLink } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ const Aside = () => {
   const asideRef = useRef(null);
   const toggleButtonRef = useRef(null);
   const dispatch = useDispatch();
-  const menu = useSelector(state => state.pageSlice);
+  const menu = useSelector(state => state.pageSlice.menu);
 
   const handleOutsideClick = (event) => {
     if (
@@ -16,7 +16,7 @@ const Aside = () => {
       !asideRef.current.contains(event.target) &&
       (!toggleButtonRef.current || !toggleButtonRef.current.contains(event.target))
     ) {
-      dispatch(setPageData(false));
+      dispatch(updateMenu(false));
     }
   };
 
@@ -33,11 +33,14 @@ const Aside = () => {
   return (
     <>
       <NavBar toggleButtonRef={toggleButtonRef} />
+      sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 ps bg-white
+      
       <aside
         ref={asideRef}
-        className={`sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 ps bg-white ${menu ? 'show' : 'hide'}`}
+        className={`sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 ps bg-white`}
         id="sidenav-main"
       >
+      
     <div className="sidenav-header">
     <i className="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav" />
     <a className="navbar-brand m-0" href=" https://demos.creative-tim.com/argon-dashboard/pages/dashboard.html " target="_blank">

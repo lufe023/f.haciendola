@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import getAllCategories from './getCategories'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate} from 'react-router-dom'
 
 const CategoriesCard = ({selectedCategory, setSelectedCategory, product, setProduct}) => {
 const dispatch = useDispatch()
-
+const navigate = useNavigate();
   useEffect(() => {
 getAllCategories(dispatch)
   }, [])
@@ -13,9 +13,13 @@ getAllCategories(dispatch)
   let categories = useSelector(state => state.dashboardSlice.categories)
 
   const handleInputChange = (category) => {
-    
+
+    if(product){
     setProduct({ ...product, category: category });
     setSelectedCategory(category)
+  }else{
+    navigate('/categories/2');
+  }
 };
 
   return (
@@ -35,16 +39,14 @@ getAllCategories(dispatch)
               <i className="ni ni-tag text-white opacity-10" />
             </div>
             <div className="d-flex flex-column ">
-              
               <h6 className="mb-1 text-dark text-sm"
-              style={{cursor:"pointer"}}
+              style={{cursor:product?'pointer':"edit"}}
               onClick={()=>handleInputChange(category.id)}
               >{category.name}</h6>
             </div>
           </div>
           <div className="d-flex">
             <Link to={`/categories/${category.id}`} onClick={()=>localStorage.setItem('redirectPath', '/categories')} className="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto">
-              
               <i className="fas fa-edit" aria-hidden="true"/>
               </Link>
           </div>

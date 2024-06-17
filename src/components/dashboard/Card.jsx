@@ -4,9 +4,13 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Importa los estilos del carrusel
 import './carousel.css';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import getConfig from '../utils/getConfig';
 
-const Card = ({ product }) => {
+
+const Card = ({ product, cartId }) => {
   const [imageUrls, setImageUrls] = useState([]);
+  const [loading, setLoading] = useState(false)
 
   // Función para convertir los precios y poner las comas a los miles y los flotantes
   const formatPrice = (price) => {
@@ -39,6 +43,52 @@ const Card = ({ product }) => {
     fetchImages();
   }, [product.Title]);
 
+  const addToCart = (productId, cartId = null)=> {
+let product = {productId, quantity: 1} 
+      setLoading(true)
+      // Submit updated product data
+      axios.post(`${import.meta.env.VITE_API_SERVER}/api/v1/cart/${cartId}/products`, product,getConfig())
+          .then(response => {
+
+              setLoading(false)
+              const Toast = Swal.mixin({
+                  toast: true,
+                  position: "top-end",
+                  showConfirmButton: false,
+                  timer: 3000,
+                  timerProgressBar: true,
+                  didOpen: (toast) => {
+                      toast.addEventListener("mouseenter", Swal.stopTimer);
+                      toast.addEventListener("mouseleave", Swal.resumeTimer);
+                  },
+              });
+  
+              Toast.fire({
+                  icon: "success",
+                  title: "Producto Agregao al carrito!",
+              });
+          })
+          .catch(error => {
+              console.error('Error updating product:', error);
+              setLoading(false)
+              const Toast = Swal.mixin({
+                  toast: true,
+                  position: "top-end",
+                  showConfirmButton: false,
+                  timer: 6000,
+                  timerProgressBar: true,
+                  didOpen: (toast) => {
+                      toast.addEventListener("mouseenter", Swal.stopTimer);
+                      toast.addEventListener("mouseleave", Swal.resumeTimer);
+                  },
+              });
+  
+              Toast.fire({
+                  icon: "error",
+                  title: `Hubo un error al agregar producto`,
+              });
+          });
+  } 
   return (
     <div className="col-12 col-sm-6 col-md-4 d-flex flex-column" style={{ marginBottom: '15px' }}>
       <div className="card">
@@ -75,12 +125,12 @@ const Card = ({ product }) => {
         <div className="card-footer">
           <div className="text-right" style={{ display: 'flex', alignItems: 'center', alignContent:"center", flexWrap:"wrap"}}>
           <div className="col-6">
-            <a href="#" className="btn bg-teal" alt="Agregar a Favorito">
+            <a className="btn bg-teal" alt="Agregar a Favorito">
               <i className="fas fa-heart" />&nbsp;&nbsp; Agregar Favoritos
             </a>
             </div>
             <div className="col-6">
-            <a className="btn bg-gradient-primary"> <i className="fas fa-cart-plus" />&nbsp;&nbsp; Agregar al Carrito</a>
+            <a className="btn bg-gradient-primary" onClick={()=>addToCart(product.id, cartId)}> <i className="fas fa-cart-plus" />&nbsp;&nbsp; Agregar al Carrito</a>
             </div>
             
 

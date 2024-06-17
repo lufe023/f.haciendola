@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const playerSlice = createSlice({
+export const dashboardSlice = createSlice({
     name: "dashboard",
     initialState: {
         usersToday: "Cargando",
@@ -60,6 +60,6 @@ export const {
     updateUsersThisMonth,
     updateUsersLastMonth,
     updateCategories,
-} = playerSlice.actions;
+} = dashboardSlice.actions;
 
-export default playerSlice.reducer;
+export default dashboardSlice.reducer;

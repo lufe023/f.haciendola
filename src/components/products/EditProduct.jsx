@@ -17,7 +17,7 @@ const EditProduct = () => {
     const [product, setProduct] = useState(null);
     const [modifiedFields, setModifiedFields] = useState({});
     const [loading, setLoading] = useState(false);
-    let menu = useSelector(state => state.pageSlice);
+    let menu = useSelector(state => state.pageSlice.menu);
     const [imageUrls, setImageUrls] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState()
 

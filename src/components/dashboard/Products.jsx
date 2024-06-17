@@ -12,6 +12,8 @@ import Spinner from "../utils/Spinner";
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const user = useSelector(state => state.userSlice);
+
   const [pagination, setPagination] = useState({
     limit: 10,
     count: 0,
@@ -50,7 +52,7 @@ const Products = () => {
   const endPage = Math.min(totalPages, startPage + maxPageButtons - 1);
   const pages = Array.from({ length: endPage - startPage + 1 }, (_, index) => startPage + index);
 
-  let menu = useSelector(state => state.pageSlice);
+  let menu = useSelector(state => state.pageSlice.menu);
  
 
 
@@ -116,7 +118,7 @@ const Products = () => {
             <div className="row">
               
               {products.map(product => (
-                <Card key={product.id} product={product} />
+                <Card key={product.id} product={product} cartId={user?.Cart?.id}/>
               ))}
             </div>
             <div className="card-footer">

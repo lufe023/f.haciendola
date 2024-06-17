@@ -122,7 +122,7 @@ const CategoryEdit = () => {
                     <div className="col-md-12">
                     <label htmlFor="title" className="form-control-label">Categoría Padre</label>
                     <div className="input-group">
-                    <select onChange={handleInputChange} value={category.parent} name='parent' className="form-select" aria-label="Default select example">
+                    <select onChange={handleInputChange} defaultValue={category.parent} name='parent' className="form-select" aria-label="Default select example">
                     <option value={0} >Sin padre</option>
                     {categories?.map(category => (
                     <option  key={category.id} value={category.id}>{category.name}</option>

@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const pageSlice = createSlice({
-    name: "page",
+export const cartSlice = createSlice({
+    name: "cart",
     initialState: {
-        menu: false,
+        cartId: null,
+        cartProducts: null,
     },
     reducers: {
-        setPageData: (state, action) => {
+        setCart: (state, action) => {
             return {
                 ...state,
                 ...action.payload,
@@ -15,12 +16,12 @@ export const pageSlice = createSlice({
         updateMenu: (state, action) => {
             return {
                 ...state,
-                menu: action.payload,
+                cartProducts: action.payload,
             };
         },
     },
 });
 
-export const { setPageData, updateMenu } = pageSlice.actions;
+export const { setPageData, updateMenu } = cartSlice.actions;
 
-export default pageSlice.reducer;
+export default cartSlice.reducer;

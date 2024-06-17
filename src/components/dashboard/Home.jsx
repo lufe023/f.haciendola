@@ -5,7 +5,7 @@ import PanelArea from './PanelArea'
 import { useSelector } from 'react-redux'
 
 const Home = () => {
-  let menu = useSelector(state => state.pageSlice)
+  let menu = useSelector(state => state.pageSlice.menu)
 
 
 
@@ -16,6 +16,7 @@ const Home = () => {
     <Header/>
     <Aside/>
     <PanelArea/>
+   
     </div>
  
   )
