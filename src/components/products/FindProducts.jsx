@@ -36,12 +36,24 @@ const FindProducts = ({ searchTerm }) => {
     }
   }, [searchTerm]);
 
+  const renderMessage = () => {
+    if (searchTerm?.length > 2) {
+      if (total > 0) {
+        return `Se encontraron ${total} productos`;
+      } else {
+        return "No pude encontrar nada :'(";
+      }
+    } else {
+      return '';
+    }
+  };
+
   return (
     <div>
       {loading && <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}><Spinner /></div>}
-      <div className="row" style={{padding:"20px"}}><h5>
-      {total?`Se encontraron ${total} productos`:`no pude encontrar nada :'(`
-      }</h5></div>
+      <div className="row" style={{padding:"20px"}}><h5>{renderMessage()}
+</h5>
+</div>
       <div className="row">
         {products.map(product => (
           <Card key={product.id} product={product} />

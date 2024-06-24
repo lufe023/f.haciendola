@@ -19,7 +19,7 @@ const SearchPage = () => {
   };
 
   return (
-       <div className={`g-sidenav-show bg-gray-100 ${menu ? 'g-sidenav-pinned' : ''}`}>
+        <div className={`g-sidenav-show bg-gray-100 ${menu ? 'g-sidenav-pinned' : ''}`}>
         <Header/>
         <Aside/>
         <main className="main-content position-relative border-radius-lg">
