@@ -88,21 +88,14 @@ const Aside = () => {
       </li>
 
       <li className="nav-item">
-        <a className="nav-link " href="./pages/tables.html">
+        <NavLink to={'/cart'} className="nav-link" href="./pages/dashboard.html">
           <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-            <i className="ni ni-calendar-grid-58 text-warning text-sm opacity-10" />
+        <i className="fas fa-shopping-cart text-primary text-sm opacity-10" />
           </div>
-          <span className="nav-link-text ms-1">Tables</span>
-        </a>
+          <span className="nav-link-text ms-1">Carrito</span>
+        </NavLink>
       </li>
-      <li className="nav-item">
-        <a className="nav-link " href="./pages/billing.html">
-          <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-            <i className="ni ni-credit-card text-success text-sm opacity-10" />
-          </div>
-          <span className="nav-link-text ms-1">Billing</span>
-        </a>
-      </li>
+  
       <li className="nav-item">
         <a className="nav-link " href="./pages/virtual-reality.html">
           <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">

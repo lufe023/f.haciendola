@@ -50,7 +50,6 @@ const NavBar = ({toggleButtonRef}) => {
                 location.pathname=='/search'?"":
             <div className="input-group">
               <span className="input-group-text text-body"><i className="fas fa-search" aria-hidden="true" /></span>
-             
                 <input 
                 type="text" 
                 className="form-control" 

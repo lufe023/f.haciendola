@@ -15,8 +15,7 @@ import EditProduct from './components/products/EditProduct'
 import FindProducts from './components/products/FindProducts'
 import SearchPage from './components/products/SearchPage'
 import CategoriesPage from './components/categories/CategoriesPage'
-
-
+import CartPage from './components/cart/CartPage'
 
 function App() {
   const dispatch = useDispatch();
@@ -43,6 +42,7 @@ function App() {
         <Route path="/products/edit/:id" element={<EditProduct/>} />
         <Route path="/categories" element={<CategoriesPage/>} />
         <Route path="/categories/:id" element={<CategoriesPage/>} />
+        <Route path="/cart" element={<CartPage/>} />
       </Route>
       </Routes>
     </>
