@@ -18,7 +18,7 @@ getAllCategories(dispatch)
     setProduct({ ...product, category: category });
     setSelectedCategory(category)
   }else{
-    navigate('/categories/2');
+    navigate(`/categories/${category}`);
   }
 };
 

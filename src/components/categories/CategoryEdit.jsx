@@ -23,10 +23,9 @@ const CategoryEdit = () => {
   const [loading, setLoading] = useState(false)
 
     let categories = useSelector(state => state.dashboardSlice.categories)
-
     useEffect(() => {
       getCategoryById(location,setCategory)
-      getCategories(dispatch)
+    //   getCategories(dispatch)
     }, [])
 
     const handleInputChange = (e) => {
@@ -100,7 +99,7 @@ const CategoryEdit = () => {
                                     type="text" 
                                     name="name" 
                                     onChange={handleInputChange}
-                                    value={category.name}
+                                    value={category?.name}
                                 />
                             </div>
                         </div>
@@ -114,7 +113,7 @@ const CategoryEdit = () => {
                                     type="text" 
                                     name="description" 
                                     onChange={handleInputChange}
-                                    value={category.description}
+                                    value={category?.description}
                                 />
                             </div>
                         </div>
@@ -122,7 +121,7 @@ const CategoryEdit = () => {
                     <div className="col-md-12">
                     <label htmlFor="title" className="form-control-label">Categoría Padre</label>
                     <div className="input-group">
-                    <select onChange={handleInputChange} defaultValue={category.parent} name='parent' className="form-select" aria-label="Default select example">
+                    <select onChange={handleInputChange} defaultValue={category?.parent} name='parent' className="form-select" aria-label="Default select example">
                     <option value={0} >Sin padre</option>
                     {categories?.map(category => (
                     <option  key={category.id} value={category.id}>{category.name}</option>
@@ -135,7 +134,7 @@ const CategoryEdit = () => {
                     <div className="input-group">
                     <Link to={'/categories'} className={`btn btn-sm btn-warning  mt-3`}>Cancelar</Link>
                     <a onClick={()=>deleteCategory(category.id, category.name, navigate)} className={`btn btn-sm btn-danger  mt-3`}>Borrar</a>
-                    <button type="submit" className={`btn btn-sm  mt-3 ${category.name?'btn-dark':'btn-secondary'}`}>Guardar Cambios</button>
+                    <button type="submit" className={`btn btn-sm  mt-3 ${category?.name?'btn-dark':'btn-secondary'}`}>Guardar Cambios</button>
                     </div>
                     </div>
                 </div>
